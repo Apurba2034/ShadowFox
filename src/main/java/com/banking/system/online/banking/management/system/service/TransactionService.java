@@ -10,32 +10,40 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
+
 public class TransactionService {
 
     @Autowired
     private TransactionRepository transactionRepository;
+
     public List<TransactionDTO> getTransactionsByAccountNumber(Long accountNumber) {
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-        List<Transaction> transactions =
-                transactionRepository.findByFromAccountNumberOrToAccountNumber(
-                        accountNumber, accountNumber
-                );
+        List<Transaction> transactions = transactionRepository.findByAccountInvolved(accountNumber);
 
         return transactions.stream().map(tx -> {
             TransactionDTO dto = new TransactionDTO();
+
             dto.setType(tx.getTransaction_type());
             dto.setAmount(tx.getAmount());
-            dto.setFromAccount(tx.getFromAccountNumber());
-            dto.setToAccount(tx.getToAccountNumber());
+
+            if (tx.getFromAccount() != null)
+                dto.setFromAccount(tx.getFromAccount().getAccountNumber());
+
+            if (tx.getToAccount() != null)
+                dto.setToAccount(tx.getToAccount().getAccountNumber());
+
             dto.setDate(tx.getTimestamp().format(dateFormatter));
             dto.setTime(tx.getTimestamp().format(timeFormatter));
+
             return dto;
         }).toList();
     }
 
-
 }
+
+
+
 

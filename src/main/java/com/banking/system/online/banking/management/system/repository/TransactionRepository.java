@@ -9,7 +9,13 @@ import java.util.List;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-    List<Transaction> findByFromAccountNumberOrToAccountNumber(
-            Long fromAccountNumber, Long toAccountNumber
-    );
+    @Query("""
+    SELECT t FROM Transaction t 
+    WHERE t.fromAccount.accountNumber = :accountNumber 
+       OR t.toAccount.accountNumber = :accountNumber
+    ORDER BY t.timestamp DESC
+    """)
+    List<Transaction> findByAccountInvolved(Long accountNumber);
 }
+
+

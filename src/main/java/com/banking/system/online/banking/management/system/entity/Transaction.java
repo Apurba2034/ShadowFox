@@ -18,9 +18,13 @@ public class Transaction {
 
     private LocalDateTime timestamp;
 
-    private Long fromAccountNumber;
-    private Long toAccountNumber;
+    @ManyToOne
+    @JoinColumn(name = "from_account_id")
+    private Account fromAccount;
 
+    @ManyToOne
+    @JoinColumn(name = "to_account_id")
+    private Account toAccount;
 
     public Long getId() {
         return id;
@@ -46,22 +50,6 @@ public class Transaction {
         this.transaction_type = transaction_type;
     }
 
-    public Long getFromAccountNumber() {
-        return fromAccountNumber;
-    }
-
-    public void setFromAccountNumber(Long fromAccountNumber) {
-        this.fromAccountNumber = fromAccountNumber;
-    }
-
-    public Long getToAccountNumber() {
-        return toAccountNumber;
-    }
-
-    public void setToAccountNumber(Long toAccountNumber) {
-        this.toAccountNumber = toAccountNumber;
-    }
-
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
@@ -69,6 +57,24 @@ public class Transaction {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+    public Account getToAccount() {
+        return toAccount;
+    }
+
+    public void setToAccount(Account toAccount) {
+        this.toAccount = toAccount;
+    }
+
+    public Account getFromAccount() {
+        return fromAccount;
+    }
+
+    public void setFromAccount(Account fromAccount) {
+        this.fromAccount = fromAccount;
+    }
+
+
 }
 
 

@@ -51,11 +51,10 @@ public class AccountService {
         accountRepository.save(account);
 
         Transaction tx = new Transaction();
+        tx.setToAccount(account);
         tx.setAmount(dto.getAmount());
         tx.setTransaction_type("CREDIT");
         tx.setTimestamp(LocalDateTime.now());
-        tx.setFromAccountNumber(null);
-        tx.setToAccountNumber(account.getAccountNumber());
 
         transactionRepository.save(tx);
     }
@@ -78,23 +77,21 @@ public class AccountService {
         accountRepository.save(from);
         accountRepository.save(to);
 
-        LocalDateTime now = LocalDateTime.now();
-
 
         Transaction debit = new Transaction();
+        debit.setFromAccount(from);
+        debit.setToAccount(to);
         debit.setAmount(dto.getAmount());
         debit.setTransaction_type("DEBIT");
         debit.setTimestamp(LocalDateTime.now());
-        debit.setFromAccountNumber(from.getAccountNumber());
-        debit.setToAccountNumber(to.getAccountNumber());
-
 
         Transaction credit = new Transaction();
+        credit.setFromAccount(from);
+        credit.setToAccount(to);
         credit.setAmount(dto.getAmount());
         credit.setTransaction_type("CREDIT");
         credit.setTimestamp(LocalDateTime.now());
-        credit.setFromAccountNumber(from.getAccountNumber());
-        credit.setToAccountNumber(to.getAccountNumber());
+
 
         transactionRepository.save(debit);
         transactionRepository.save(credit);
