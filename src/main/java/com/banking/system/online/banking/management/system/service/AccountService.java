@@ -52,7 +52,7 @@ public class AccountService {
 
         Transaction transaction = new Transaction();
         transaction.setAmount(dto.getAmount());
-        transaction.setTransaction_type("CREDIT");
+        transaction.setTransactionType("CREDIT");
         transaction.setTimestamp(LocalDateTime.now());
         transaction.setFromAccount(null);
         transaction.setToAccount(account.getAccountNumber());
@@ -81,14 +81,14 @@ public class AccountService {
 
         Transaction debit = new Transaction();
         debit.setAmount(dto.getAmount());
-        debit.setTransaction_type("DEBIT");
+        debit.setTransactionType("DEBIT");
         debit.setTimestamp(LocalDateTime.now());
         debit.setFromAccount(from.getAccountNumber());
         debit.setToAccount(to.getAccountNumber());
 
         Transaction credit = new Transaction();
         credit.setAmount(dto.getAmount());
-        credit.setTransaction_type("CREDIT");
+        credit.setTransactionType("CREDIT");
         credit.setTimestamp(LocalDateTime.now());
         credit.setFromAccount(from.getAccountNumber());
         credit.setToAccount(to.getAccountNumber());

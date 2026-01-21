@@ -26,7 +26,7 @@ public class TransactionService {
         return transactions.stream().map(tx -> {
             TransactionDTO dto = new TransactionDTO();
 
-            dto.setType(tx.getTransaction_type());
+            dto.setType(tx.getTransactionType());
             dto.setAmount(tx.getAmount());
 
             if (tx.getFromAccount() != null)

@@ -14,15 +14,17 @@ public class Transaction {
 
     private Double amount;
 
-    private String transaction_type;
-
-    private LocalDateTime timestamp;
+    @Column(name = "transaction_type")
+    private String transactionType;
 
     @Column(name = "from_account")
     private Long fromAccount;
 
     @Column(name = "to_account")
     private Long toAccount;
+
+    @Column(name = "created_at")
+    private LocalDateTime timestamp;
 
     public Long getId() {
         return id;
@@ -40,20 +42,12 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public String getTransaction_type() {
-        return transaction_type;
+    public String getTransactionType() {
+        return transactionType;
     }
 
-    public void setTransaction_type(String transaction_type) {
-        this.transaction_type = transaction_type;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 
     public Long getFromAccount() {
@@ -62,6 +56,14 @@ public class Transaction {
 
     public void setFromAccount(Long fromAccount) {
         this.fromAccount = fromAccount;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Long getToAccount() {

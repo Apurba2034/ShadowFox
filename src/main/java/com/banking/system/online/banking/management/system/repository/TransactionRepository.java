@@ -10,12 +10,12 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
     @Query("""
-    SELECT t FROM Transaction t 
-    WHERE t.fromAccount.accountNumber = :accountNumber 
-       OR t.toAccount.accountNumber = :accountNumber
-    ORDER BY t.timestamp DESC
+        SELECT t FROM Transaction t
+        WHERE t.fromAccount = :accountNumber OR t.toAccount = :accountNumber
+        ORDER BY t.timestamp DESC
     """)
     List<Transaction> findByAccountInvolved(Long accountNumber);
 }
+
 
 
