@@ -3,7 +3,7 @@ package com.banking.system.online.banking.management.system.dto;
 public class TransactionDTO {
 
         private String type;
-        private double amount;
+        private Double amount;
         private Long fromAccount;
         private Long toAccount;
         private String date;
@@ -17,11 +17,11 @@ public class TransactionDTO {
         this.type = type;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

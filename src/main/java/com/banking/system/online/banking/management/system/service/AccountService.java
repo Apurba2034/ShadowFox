@@ -78,6 +78,8 @@ public class AccountService {
         accountRepository.save(from);
         accountRepository.save(to);
 
+        LocalDateTime now = LocalDateTime.now();
+
 
         Transaction debit = new Transaction();
         debit.setAmount(dto.getAmount());

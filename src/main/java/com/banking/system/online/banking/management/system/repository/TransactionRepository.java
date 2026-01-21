@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    @Query("SELECT t FROM Transaction t WHERE t.fromAccountNumber = :acc OR t.toAccountNumber = :acc")
-    List<Transaction> findByAccountInvolved(@Param("acc") Long acc);
 
-
+    List<Transaction> findByFromAccountNumberOrToAccountNumber(
+            Long fromAccountNumber, Long toAccountNumber
+    );
 }

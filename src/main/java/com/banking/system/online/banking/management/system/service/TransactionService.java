@@ -19,8 +19,10 @@ public class TransactionService {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-        List<Transaction> transactions = transactionRepository
-                .findByAccountInvolved(accountNumber);
+        List<Transaction> transactions =
+                transactionRepository.findByFromAccountNumberOrToAccountNumber(
+                        accountNumber, accountNumber
+                );
 
         return transactions.stream().map(tx -> {
             TransactionDTO dto = new TransactionDTO();
