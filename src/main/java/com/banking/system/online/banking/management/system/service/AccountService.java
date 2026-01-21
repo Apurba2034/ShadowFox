@@ -50,13 +50,14 @@ public class AccountService {
         account.setBalance(account.getBalance() + dto.getAmount());
         accountRepository.save(account);
 
-        Transaction tx = new Transaction();
-        tx.setToAccount(account);
-        tx.setAmount(dto.getAmount());
-        tx.setTransaction_type("CREDIT");
-        tx.setTimestamp(LocalDateTime.now());
+        Transaction transaction = new Transaction();
+        transaction.setAmount(dto.getAmount());
+        transaction.setTransaction_type("CREDIT");
+        transaction.setTimestamp(LocalDateTime.now());
+        transaction.setFromAccount(null);
+        transaction.setToAccount(account.getAccountNumber());
 
-        transactionRepository.save(tx);
+        transactionRepository.save(transaction);
     }
 
     public void transfer(TransferRequest dto) {
@@ -79,18 +80,18 @@ public class AccountService {
 
 
         Transaction debit = new Transaction();
-        debit.setFromAccount(from);
-        debit.setToAccount(to);
         debit.setAmount(dto.getAmount());
         debit.setTransaction_type("DEBIT");
         debit.setTimestamp(LocalDateTime.now());
+        debit.setFromAccount(from.getAccountNumber());
+        debit.setToAccount(to.getAccountNumber());
 
         Transaction credit = new Transaction();
-        credit.setFromAccount(from);
-        credit.setToAccount(to);
         credit.setAmount(dto.getAmount());
         credit.setTransaction_type("CREDIT");
         credit.setTimestamp(LocalDateTime.now());
+        credit.setFromAccount(from.getAccountNumber());
+        credit.setToAccount(to.getAccountNumber());
 
 
         transactionRepository.save(debit);

@@ -30,10 +30,10 @@ public class TransactionService {
             dto.setAmount(tx.getAmount());
 
             if (tx.getFromAccount() != null)
-                dto.setFromAccount(tx.getFromAccount().getAccountNumber());
+                dto.setFromAccount(tx.getFromAccount());
 
             if (tx.getToAccount() != null)
-                dto.setToAccount(tx.getToAccount().getAccountNumber());
+                dto.setToAccount(tx.getToAccount());
 
             dto.setDate(tx.getTimestamp().format(dateFormatter));
             dto.setTime(tx.getTimestamp().format(timeFormatter));
