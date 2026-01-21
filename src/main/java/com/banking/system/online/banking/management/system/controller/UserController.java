@@ -1,5 +1,7 @@
 package com.banking.system.online.banking.management.system.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.banking.system.online.banking.management.system.dto.LoginRequest;
 import com.banking.system.online.banking.management.system.dto.RegisterRequest;
@@ -26,10 +28,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody LoginRequest dto){
-
-        return userService.loginUsers(dto);
+    public ResponseEntity<?> login(@RequestBody LoginRequest dto) {
+        try {
+            User user = userService.loginUsers(dto);
+            return ResponseEntity.ok(user);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
+
     @GetMapping("/{id}")
     public User getUser(@PathVariable Long id) {
         return userService.getUserById(id);
