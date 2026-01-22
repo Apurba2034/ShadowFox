@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Service
 public class AccountService {
@@ -53,7 +55,7 @@ public class AccountService {
         Transaction transaction = new Transaction();
         transaction.setAmount(dto.getAmount());
         transaction.setTransactionType("CREDIT");
-        transaction.setTimestamp(LocalDateTime.now());
+        transaction.setTimestamp(ZonedDateTime.now(ZoneId.of("Asia/Kolkata")).toLocalDateTime());
         transaction.setFromAccount(null);
         transaction.setToAccount(account.getAccountNumber());
 
@@ -82,14 +84,14 @@ public class AccountService {
         Transaction debit = new Transaction();
         debit.setAmount(dto.getAmount());
         debit.setTransactionType("DEBIT");
-        debit.setTimestamp(LocalDateTime.now());
+        debit.setTimestamp(ZonedDateTime.now(ZoneId.of("Asia/Kolkata")).toLocalDateTime());
         debit.setFromAccount(from.getAccountNumber());
         debit.setToAccount(to.getAccountNumber());
 
         Transaction credit = new Transaction();
         credit.setAmount(dto.getAmount());
         credit.setTransactionType("CREDIT");
-        credit.setTimestamp(LocalDateTime.now());
+        credit.setTimestamp(ZonedDateTime.now(ZoneId.of("Asia/Kolkata")).toLocalDateTime());
         credit.setFromAccount(from.getAccountNumber());
         credit.setToAccount(to.getAccountNumber());
 
